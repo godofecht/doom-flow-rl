@@ -22,9 +22,14 @@ jobs:
           path: flow
 
       - name: Install tools
-        run: sudo apt-get update && sudo apt-get install -y clang python3
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang python3 python3-pip
+          python3 -m pip install --user -r flow/requirements.txt
 
       - name: Train and gate on baseline
+        env:
+          FLOW_HOST: python
         run: |
           chmod +x flow/flow
           ./flow/flow run q_doom.flow
