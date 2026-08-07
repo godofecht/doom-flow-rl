@@ -26,6 +26,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y clang python3 python3-pip
           python3 -m pip install --user -r flow/requirements.txt
+          # flow's python compile path omits -lm; Linux needs it for libm.
+          mkdir -p "$HOME/.local/bin"
+          printf '%s\n' '#!/bin/bash' 'exec /usr/bin/clang "$@" -lm' > "$HOME/.local/bin/clang"
+          chmod +x "$HOME/.local/bin/clang"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Train and gate on baseline
         env:
