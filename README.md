@@ -1,5 +1,7 @@
 # doom-flow-rl
 
+[![Train Q-DOOM](https://github.com/godofecht/doom-flow-rl/actions/workflows/train.yml/badge.svg)](https://github.com/godofecht/doom-flow-rl/actions/workflows/train.yml)
+
 Teach an agent to play a **Doom-like** combat loop in [Flow](https://github.com/flooooooooooow/flow),
 using Flow's own RL APIs (`stdlib/ai.flow`), the same way the upstream
 [game-ai tutorial](https://github.com/flooooooooooow/flow/blob/main/docs/tutorials/game-ai.md)

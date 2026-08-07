@@ -13,10 +13,10 @@ jobs:
   train:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Checkout Flow
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: flooooooooooow/flow
           path: flow
@@ -24,9 +24,11 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang python3 python3-pip
-          python3 -m pip install --user -r flow/requirements.txt
-          # flow's python compile path omits -lm; Linux needs it for libm.
+          sudo apt-get install -y clang python3 python3-pip python3-venv
+          python3 -m venv .venv
+          .venv/bin/pip install -r flow/requirements.txt
+          echo "${{ github.workspace }}/.venv/bin" >> "$GITHUB_PATH"
+          # flow's python compile path omits -lm; Linux needs libm for stdlib/ai.flow.
           mkdir -p "$HOME/.local/bin"
           printf '%s\n' '#!/bin/bash' 'exec /usr/bin/clang "$@" -lm' > "$HOME/.local/bin/clang"
           chmod +x "$HOME/.local/bin/clang"
