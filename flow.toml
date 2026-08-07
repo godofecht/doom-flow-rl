@@ -1,0 +1,10 @@
+[package]
+name = "doom-flow-rl"
+version = "0.1.0"
+description = "Flow RL agent for a Doom-like arena (companion to doom-flow)"
+entry = "q_doom.flow"
+license = "MIT"
+
+[dependencies]
+
+[dev-dependencies]
